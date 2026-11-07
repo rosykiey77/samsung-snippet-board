@@ -7,6 +7,7 @@ import '../data/snippet_repo.dart';
 import '../l10n/app_localizations.dart';
 import 'category_chips.dart';
 import 'theme.dart';
+import 'upgrade_page.dart';
 
 /// Tambah ([snippet] null) atau edit snippet (ui-specs §9).
 class EditorPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _EditorPageState extends State<EditorPage> {
   Future<void> _save() async {
     if (_saving) return;
     final repo = AppScope.of(context).repo;
-    final l = AppLocalizations.of(context);
+    var upgraded = false;
     setState(() => _saving = true);
     try {
       final s = widget.snippet;
@@ -52,20 +53,12 @@ class _EditorPageState extends State<EditorPage> {
     } on SnippetInvalid catch (e) {
       setState(() => _error = e.field);
     } on FreeLimitReached {
-      // shortcut: dialog sementara, diganti layar Upgrade di US6 (T053).
-      if (mounted) {
-        await showDialog<void>(
-          context: context,
-          builder: (c) => AlertDialog(
-            title: Text(l.freeLimitTitle),
-            content: Text(l.freeLimitBody),
-            actions: [TextButton(onPressed: () => Navigator.pop(c), child: Text(l.ok))],
-          ),
-        );
-      }
+      upgraded = mounted && await UpgradePage.open(context);
     } finally {
       if (mounted) setState(() => _saving = false);
     }
+    // Beli/pulihkan berhasil → langsung simpan ulang tanpa restart (US6 skenario 2).
+    if (upgraded && mounted) await _save();
   }
 
   Future<void> _confirmDiscard() async {

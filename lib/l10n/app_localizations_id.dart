@@ -231,4 +231,65 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get fileError => 'Gagal membaca atau menulis file';
+
+  @override
+  String get proGroup => 'Pro';
+
+  @override
+  String get proActive => 'Pro aktif — snippet tanpa batas';
+
+  @override
+  String get upgradeToPro => 'Upgrade ke Pro';
+
+  @override
+  String get restorePurchase => 'Pulihkan pembelian';
+
+  @override
+  String get restoreNone => 'Tidak ada pembelian Pro';
+
+  @override
+  String get restoreDone => 'Pro dipulihkan';
+
+  @override
+  String get proTitle => 'Snippet Pro';
+
+  @override
+  String get proUnlimited => 'Snippet tanpa batas';
+
+  @override
+  String get proLifetime => 'Sekali bayar, selamanya';
+
+  @override
+  String get proOffline => 'Tetap 100% offline';
+
+  @override
+  String buyFor(String price) {
+    return 'Beli $price';
+  }
+
+  @override
+  String get iapUnavailable => 'Pembelian memerlukan Galaxy Store';
+
+  @override
+  String get iapCancelled => 'Pembelian dibatalkan';
+
+  @override
+  String get iapFailed => 'Pembelian gagal, tidak ada yang berubah';
+
+  @override
+  String snippetCount(int count) {
+    return '$count/10 snippet';
+  }
+
+  @override
+  String get upgrade => 'Upgrade';
+
+  @override
+  String get aboutGroup => 'Tentang';
+
+  @override
+  String get privacy => 'Privasi';
+
+  @override
+  String get privacyBody => '100% offline: tanpa akses internet, tanpa pelacakan atau analitik. Snippet hanya tersimpan di perangkat ini dan tidak di-backup otomatis. Satu-satunya koneksi luar adalah alur pembelian Galaxy Store.';
 }

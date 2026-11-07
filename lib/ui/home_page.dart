@@ -2,12 +2,14 @@ import 'package:material_ui/material_ui.dart';
 
 import '../app_scope.dart';
 import '../data/db.dart';
+import '../data/snippet_repo.dart';
 import '../l10n/app_localizations.dart';
 import 'category_chips.dart';
 import 'editor_page.dart';
 import 'settings_page.dart';
 import 'snippet_card.dart';
 import 'theme.dart';
+import 'upgrade_page.dart';
 
 /// Home One UI (ui-specs §1): 1/3 atas viewing area (judul besar), 2/3 bawah interaksi.
 class HomePage extends StatefulWidget {
@@ -20,6 +22,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int? _category;
   late Stream<List<Snippet>> _stream;
+  late Stream<int> _count;
+  late Stream<bool> _pro;
   bool _init = false;
 
   @override
@@ -27,7 +31,10 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     if (!_init) {
       _init = true;
-      _stream = AppScope.of(context).repo.watch();
+      final scope = AppScope.of(context);
+      _stream = scope.repo.watch();
+      _count = scope.repo.watchCount();
+      _pro = scope.settings.watchPro();
     }
   }
 
@@ -38,6 +45,14 @@ class _HomePageState extends State<HomePage> {
 
   void _openEditor([Snippet? s]) =>
       Navigator.push(context, MaterialPageRoute<void>(builder: (_) => EditorPage(snippet: s)));
+
+  /// FAB: batas gratis tercapai → Upgrade dulu (ui-specs §1.3); batal → tidak membuka editor.
+  Future<void> _add() async {
+    if (await AppScope.of(context).repo.atFreeLimit()) {
+      if (!mounted || !await UpgradePage.open(context)) return;
+    }
+    if (mounted) _openEditor();
+  }
 
   Future<void> _delete(Snippet s) async {
     final repo = AppScope.of(context).repo;
@@ -100,7 +115,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _openEditor,
+        onPressed: _add,
         icon: const Icon(Icons.add),
         label: Text(l.add),
       ),
@@ -124,10 +139,13 @@ class _HomePageState extends State<HomePage> {
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsetsDirectional.only(start: OneUiSpace.s2, bottom: OneUiSpace.s2),
                 expandedTitleScale: 34 / 20, // headerLarge → titleBar
-                title: Text(l.appTitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.titleLarge!.copyWith(fontSize: 20)),
+                title: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(l.appTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleLarge!.copyWith(fontSize: 20)),
+                  _counter(l, theme),
+                ]),
               ),
             ),
             PinnedHeaderSliver(
@@ -160,6 +178,24 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  /// "x/10 snippet" hanya untuk gratis (FR-033); 10/10 → warna primary + tautan Upgrade.
+  Widget _counter(AppLocalizations l, ThemeData theme) => StreamBuilder<bool>(
+        stream: _pro,
+        builder: (_, pro) => pro.data ?? true // sembunyikan sampai status diketahui
+            ? const SizedBox.shrink()
+            : StreamBuilder<int>(
+                stream: _count,
+                builder: (_, c) {
+                  final n = c.data ?? 0;
+                  final full = n >= SnippetRepo.freeLimit;
+                  final style = theme.textTheme.labelSmall!
+                      .copyWith(color: full ? theme.colorScheme.primary : theme.colorScheme.onSurfaceVariant);
+                  final text = Text(full ? '${l.snippetCount(n)} · ${l.upgrade}' : l.snippetCount(n), style: style);
+                  return full ? InkWell(onTap: () => UpgradePage.open(context), child: text) : text;
+                },
+              ),
+      );
 
   Widget _empty(AppLocalizations l, ThemeData theme) {
     if (_category != null) {

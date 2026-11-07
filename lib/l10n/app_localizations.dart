@@ -529,6 +529,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not read or write the file'**
   String get fileError;
+
+  /// No description provided for @proGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro'**
+  String get proGroup;
+
+  /// No description provided for @proActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro active — unlimited snippets'**
+  String get proActive;
+
+  /// No description provided for @upgradeToPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Pro'**
+  String get upgradeToPro;
+
+  /// No description provided for @restorePurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get restorePurchase;
+
+  /// No description provided for @restoreNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No Pro purchase found'**
+  String get restoreNone;
+
+  /// No description provided for @restoreDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro restored'**
+  String get restoreDone;
+
+  /// No description provided for @proTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snippet Pro'**
+  String get proTitle;
+
+  /// No description provided for @proUnlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited snippets'**
+  String get proUnlimited;
+
+  /// No description provided for @proLifetime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay once, yours forever'**
+  String get proLifetime;
+
+  /// No description provided for @proOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Still 100% offline'**
+  String get proOffline;
+
+  /// No description provided for @buyFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy {price}'**
+  String buyFor(String price);
+
+  /// No description provided for @iapUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchases require Galaxy Store'**
+  String get iapUnavailable;
+
+  /// No description provided for @iapCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase cancelled'**
+  String get iapCancelled;
+
+  /// No description provided for @iapFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase failed, nothing was changed'**
+  String get iapFailed;
+
+  /// No description provided for @snippetCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/10 snippets'**
+  String snippetCount(int count);
+
+  /// No description provided for @upgrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get upgrade;
+
+  /// No description provided for @aboutGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutGroup;
+
+  /// No description provided for @privacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get privacy;
+
+  /// No description provided for @privacyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'100% offline: no internet access, no tracking or analytics. Snippets stay on this device and are not backed up automatically. The only external connection is the Galaxy Store purchase flow.'**
+  String get privacyBody;
 }
 
 class _AppLocalizationsDelegate

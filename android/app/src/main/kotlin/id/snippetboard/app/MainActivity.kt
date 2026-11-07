@@ -12,6 +12,7 @@ import android.provider.Settings
 import id.snippetboard.app.core.CopyFlow
 import id.snippetboard.app.core.SnippetStore
 import id.snippetboard.app.edge.SnippetEdgeProvider
+import id.snippetboard.app.iap.IapBridge
 import id.snippetboard.app.overlay.SnippetOverlayService
 import id.snippetboard.app.tile.SnippetTileService
 import io.flutter.embedding.android.FlutterActivity
@@ -20,6 +21,7 @@ import io.flutter.plugin.common.MethodChannel
 
 /** Handler channel `snippetboard/native` — docs/contracts/method-channel.md. */
 class MainActivity : FlutterActivity() {
+    private val iap by lazy { IapBridge(this) }
     private var pendingDoc: Pair<MethodChannel.Result, String?>? = null // (result, isi yang akan ditulis)
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -102,6 +104,9 @@ class MainActivity : FlutterActivity() {
                     Intent(Intent.ACTION_CREATE_DOCUMENT).setType(JSON).putExtra(Intent.EXTRA_TITLE, call.argument<String>("name")),
                 )
                 "openDocument" -> openDoc(result, null, Intent(Intent.ACTION_OPEN_DOCUMENT).setType("*/*"))
+                "iapProduct" -> iap.product(result)
+                "iapPurchase" -> iap.purchase(result)
+                "iapRestore" -> iap.restore(result)
                 else -> result.notImplemented()
             }
         }

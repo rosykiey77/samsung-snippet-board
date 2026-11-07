@@ -20,7 +20,7 @@ class SettingsRepo {
   final AppDb db;
   final NativeBridge bridge;
 
-  static const varNama = 'var_nama', varRekening = 'var_rekening', overlayEnabled = 'overlay_enabled';
+  static const varNama = 'var_nama', varRekening = 'var_rekening', overlayEnabled = 'overlay_enabled', isPro = 'is_pro';
   static const _format = 'snippetboard', _version = 1;
 
   Stream<String?> watch(String key) =>
@@ -31,6 +31,22 @@ class SettingsRepo {
     if (key != varNama && key != varRekening) throw ArgumentError.value(key, 'key');
     await db.setSetting(key, value.trim());
     await bridge.refreshSurfaces();
+  }
+
+  Stream<bool> watchPro() => watch(isPro).map((v) => v == '1');
+
+  /// Kotlin menulis `is_pro` langsung ke SQLite (di luar drift) → beri tahu stream drift.
+  Future<bool> purchasePro() async {
+    final ok = await bridge.iapPurchase();
+    if (ok) db.notifyUpdates({TableUpdate.onTable(db.settings)});
+    return ok;
+  }
+
+  /// Error (offline, Galaxy Store tidak ada) diteruskan; status lokal tidak disentuh (FR-037).
+  Future<bool> restorePro() async {
+    final pro = await bridge.iapRestore();
+    db.notifyUpdates({TableUpdate.onTable(db.settings)});
+    return pro;
   }
 
   /// false = izin overlay belum diberikan; status tidak berubah.

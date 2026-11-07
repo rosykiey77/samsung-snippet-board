@@ -29,11 +29,15 @@ class SnippetRepo {
   Stream<List<Snippet>> watch({int? category, String? query}) =>
       db.watchSnippets(category: category, query: query);
 
+  /// Pengguna gratis dengan >= [freeLimit] snippet: snippet baru harus lewat Upgrade dulu.
+  Future<bool> atFreeLimit() async =>
+      await db.getSetting('is_pro') != '1' && await db.countSnippets() >= freeLimit;
+
+  Stream<int> watchCount() => db.snippets.count().watchSingle();
+
   Future<int> create({required String title, required String body, int category = Category.personal}) async {
     final t = validate(title, body, category);
-    if (await db.getSetting('is_pro') != '1' && await db.countSnippets() >= freeLimit) {
-      throw const FreeLimitReached();
-    }
+    if (await atFreeLimit()) throw const FreeLimitReached();
     final now = _now;
     final id = await db.into(db.snippets).insert(SnippetsCompanion.insert(
         title: t, body: body, category: Value(category), createdAt: now, updatedAt: now));

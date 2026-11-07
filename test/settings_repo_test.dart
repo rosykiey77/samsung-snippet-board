@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
+import 'package:flutter/services.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:snippetboard/data/db.dart';
@@ -14,6 +15,24 @@ class _FakeBridge extends Fake implements NativeBridge {
   final overlayCalls = <bool>[];
   @override
   Future<void> refreshSurfaces() async => refreshes++;
+  /// Meniru Kotlin: menulis `is_pro` langsung ke SQLite, di luar notifikasi drift.
+  Future<void> Function(bool pro)? nativeWrite;
+  bool owned = false;
+  PlatformException? iapError;
+  @override
+  Future<bool> iapPurchase() async {
+    if (iapError != null) throw iapError!;
+    if (owned) await nativeWrite!(true);
+    return owned;
+  }
+
+  @override
+  Future<bool> iapRestore() async {
+    if (iapError != null) throw iapError!;
+    await nativeWrite!(owned);
+    return owned;
+  }
+
   @override
   Future<String> setOverlayEnabled(bool enabled) async {
     overlayCalls.add(enabled);
@@ -33,6 +52,8 @@ void main() {
     bridge = _FakeBridge();
     snippets = SnippetRepo(db, bridge);
     repo = SettingsRepo(db, bridge);
+    bridge.nativeWrite = (pro) =>
+        db.customStatement("INSERT OR REPLACE INTO settings(key, value) VALUES ('is_pro', '${pro ? 1 : 0}')");
   });
   tearDown(() => db.close());
 
@@ -105,5 +126,34 @@ void main() {
     expect(await db.countSnippets(), 9);
     await db.setSetting('is_pro', '1');
     expect(await repo.importJson(two), 2);
+  });
+
+  test('purchasePro sukses: stream Pro ikut berubah tanpa restart', () async {
+    bridge.owned = true;
+    final emitted = expectLater(repo.watchPro(), emitsInOrder([false, true]));
+    await Future<void>.delayed(Duration.zero);
+    expect(await repo.purchasePro(), isTrue);
+    await emitted;
+    expect(await snippets.atFreeLimit(), isFalse);
+  });
+
+  test('purchasePro batal: status tetap gratis', () async {
+    expect(await repo.purchasePro(), isFalse);
+    expect(await repo.watchPro().first, isFalse);
+  });
+
+  test('restorePro: refund menurunkan ke gratis; error offline mempertahankan Pro lokal', () async {
+    await db.setSetting('is_pro', '1');
+    bridge.iapError = PlatformException(code: 'IAP_FAILED');
+    await expectLater(repo.restorePro(), throwsA(isA<PlatformException>()));
+    expect(await repo.watchPro().first, isTrue); // FR-037
+
+    bridge.iapError = null;
+    expect(await repo.restorePro(), isFalse); // tidak ada item milik → refund
+    expect(await repo.watchPro().first, isFalse);
+
+    bridge.owned = true;
+    expect(await repo.restorePro(), isTrue);
+    expect(await repo.watchPro().first, isTrue);
   });
 }

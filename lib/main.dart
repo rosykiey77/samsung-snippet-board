@@ -15,11 +15,14 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final db = AppDb();
   const bridge = NativeBridge();
+  final settings = SettingsRepo(db, bridge);
+  // Pulihkan diam-diam (refund → is_pro=0). Gagal/offline → status lokal dipertahankan (FR-037).
+  settings.restorePro().ignore();
   runApp(AppScope(
       db: db,
       repo: SnippetRepo(db, bridge),
       bridge: bridge,
-      settings: SettingsRepo(db, bridge),
+      settings: settings,
       child: const SnippetBoardApp()));
 }
 

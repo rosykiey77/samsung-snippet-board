@@ -231,4 +231,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fileError => 'Could not read or write the file';
+
+  @override
+  String get proGroup => 'Pro';
+
+  @override
+  String get proActive => 'Pro active — unlimited snippets';
+
+  @override
+  String get upgradeToPro => 'Upgrade to Pro';
+
+  @override
+  String get restorePurchase => 'Restore purchase';
+
+  @override
+  String get restoreNone => 'No Pro purchase found';
+
+  @override
+  String get restoreDone => 'Pro restored';
+
+  @override
+  String get proTitle => 'Snippet Pro';
+
+  @override
+  String get proUnlimited => 'Unlimited snippets';
+
+  @override
+  String get proLifetime => 'Pay once, yours forever';
+
+  @override
+  String get proOffline => 'Still 100% offline';
+
+  @override
+  String buyFor(String price) {
+    return 'Buy $price';
+  }
+
+  @override
+  String get iapUnavailable => 'Purchases require Galaxy Store';
+
+  @override
+  String get iapCancelled => 'Purchase cancelled';
+
+  @override
+  String get iapFailed => 'Purchase failed, nothing was changed';
+
+  @override
+  String snippetCount(int count) {
+    return '$count/10 snippets';
+  }
+
+  @override
+  String get upgrade => 'Upgrade';
+
+  @override
+  String get aboutGroup => 'About';
+
+  @override
+  String get privacy => 'Privacy';
+
+  @override
+  String get privacyBody => '100% offline: no internet access, no tracking or analytics. Snippets stay on this device and are not backed up automatically. The only external connection is the Galaxy Store purchase flow.';
 }

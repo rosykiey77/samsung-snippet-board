@@ -5,6 +5,8 @@
   <color name="p_blue_600">#0C66E4</color>
   <color name="p_blue_500">#2C74DE</color>
   <color name="p_blue_400">#3E91FF</color>
+  <!-- ikon launcher adaptif (tidak berubah di dark mode) -->
+  <color name="ic_launcher_background">@color/p_blue_600</color>
   <!-- semantic (light) -->
   <color name="background">#F8F9FA</color>
   <color name="surface">#FFFFFF</color>

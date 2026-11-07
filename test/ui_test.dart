@@ -18,6 +18,8 @@ class _FakeBridge extends Fake implements NativeBridge {
 
   @override
   Future<void> refreshSurfaces() async {}
+  @override
+  Future<String> iapProduct() async => 'Rp49.000';
 
   @override
   Future<CopyResult> copySnippet(int id, {Map<String, String> overrides = const {}}) async {
@@ -198,6 +200,28 @@ void main() {
     await t.tap(find.text('Urungkan'));
     await settle(t);
     expect(find.text('Alamat'), findsOneWidget);
+    await disposeTree(t);
+  });
+
+  testWidgets('counter x/10 & FAB membuka Upgrade saat batas gratis tercapai', (t) async {
+    await pumpHome(t);
+    expect(find.text('0/10 snippet'), findsOneWidget);
+    await run(t, () async {
+      for (var i = 0; i < 10; i++) {
+        await repo.create(title: 't$i', body: 'b$i');
+      }
+    });
+    expect(find.text('10/10 snippet · Upgrade'), findsOneWidget);
+    await t.tap(find.byType(FloatingActionButton));
+    await settle(t);
+    expect(find.text('Snippet Pro'), findsOneWidget);
+    expect(find.text('Beli Rp49.000'), findsOneWidget);
+    await t.pageBack();
+    await settle(t);
+    expect(find.text('Snippet Pro'), findsNothing); // batal → editor tidak dibuka
+
+    await run(t, () => db.setSetting('is_pro', '1'));
+    expect(find.textContaining('/10 snippet'), findsNothing); // Pro: counter disembunyikan
     await disposeTree(t);
   });
 }

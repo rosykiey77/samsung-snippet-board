@@ -56,4 +56,16 @@ class NativeBridge {
       _channel.invokeMethod<bool>('saveDocument', {'name': name, 'content': content});
 
   Future<String?> openDocument() => _channel.invokeMethod<String>('openDocument');
+
+  /// Harga lokal `pro_lifetime`. Error `IAP_UNAVAILABLE` jika Galaxy Store tidak ada.
+  Future<String> iapProduct() async =>
+      (await _channel.invokeMapMethod<String, Object?>('iapProduct'))!['price']! as String;
+
+  /// true = terbeli (Kotlin sudah menulis `is_pro=1`), false = dibatalkan. Error `IAP_UNAVAILABLE`/`IAP_FAILED`.
+  Future<bool> iapPurchase() async =>
+      (await _channel.invokeMapMethod<String, Object?>('iapPurchase'))!['status'] == 'purchased';
+
+  /// Status Pro dari Galaxy Store (Kotlin menulis hasilnya ke `settings`).
+  Future<bool> iapRestore() async =>
+      (await _channel.invokeMapMethod<String, Object?>('iapRestore'))!['isPro'] == true;
 }

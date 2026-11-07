@@ -115,4 +115,16 @@ void main() {
     await repo.setSetting('var_nama', 'Budi');
     expect(bridge.refreshes, 6);
   });
+
+  test('atFreeLimit & watchCount mengikuti jumlah snippet dan status Pro', () async {
+    await fill(9);
+    expect(await repo.atFreeLimit(), isFalse);
+    await fill(1);
+    expect(await repo.watchCount().first, 10);
+    expect(await repo.atFreeLimit(), isTrue);
+    await db.setSetting('is_pro', '1');
+    expect(await repo.atFreeLimit(), isFalse);
+    await db.setSetting('is_pro', '0'); // refund
+    expect(await repo.atFreeLimit(), isTrue);
+  });
 }

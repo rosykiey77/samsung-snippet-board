@@ -88,5 +88,38 @@
         "type": "int"
       }
     }
-  }
+  },
+  "proGroup": "Pro",
+  "proActive": "Pro active — unlimited snippets",
+  "upgradeToPro": "Upgrade to Pro",
+  "restorePurchase": "Restore purchase",
+  "restoreNone": "No Pro purchase found",
+  "restoreDone": "Pro restored",
+  "proTitle": "Snippet Pro",
+  "proUnlimited": "Unlimited snippets",
+  "proLifetime": "Pay once, yours forever",
+  "proOffline": "Still 100% offline",
+  "buyFor": "Buy {price}",
+  "@buyFor": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "iapUnavailable": "Purchases require Galaxy Store",
+  "iapCancelled": "Purchase cancelled",
+  "iapFailed": "Purchase failed, nothing was changed",
+  "snippetCount": "{count}/10 snippets",
+  "@snippetCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "upgrade": "Upgrade",
+  "aboutGroup": "About",
+  "privacy": "Privacy",
+  "privacyBody": "100% offline: no internet access, no tracking or analytics. Snippets stay on this device and are not backed up automatically. The only external connection is the Galaxy Store purchase flow."
 }

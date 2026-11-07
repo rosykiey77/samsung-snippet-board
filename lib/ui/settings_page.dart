@@ -7,6 +7,7 @@ import '../data/settings_repo.dart';
 import '../data/snippet_repo.dart';
 import '../l10n/app_localizations.dart';
 import 'theme.dart';
+import 'upgrade_page.dart';
 
 /// Pengaturan One UI (ui-specs §10.1): header besar lalu grup kartu berisi baris.
 class SettingsPage extends StatefulWidget {
@@ -142,6 +143,18 @@ class _SettingsPageState extends State<SettingsPage> with WidgetsBindingObserver
     messenger.showSnackBar(SnackBar(content: Text(msg)));
   }
 
+  Future<void> _restore() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l = AppLocalizations.of(context);
+    String msg;
+    try {
+      msg = await _repo.restorePro() ? l.restoreDone : l.restoreNone;
+    } on PlatformException catch (e) {
+      msg = e.code == 'IAP_UNAVAILABLE' ? l.iapUnavailable : l.iapFailed;
+    }
+    messenger.showSnackBar(SnackBar(content: Text(msg)));
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
@@ -194,6 +207,18 @@ class _SettingsPageState extends State<SettingsPage> with WidgetsBindingObserver
                 ),
               ),
             ]),
+            _Group(l.proGroup, [
+              StreamBuilder<bool>(
+                stream: _repo.watchPro(),
+                builder: (context, snap) => snap.data ?? false
+                    ? ListTile(leading: const Icon(Icons.workspace_premium), title: Text(l.proActive))
+                    : ListTile(
+                        leading: const Icon(Icons.workspace_premium_outlined),
+                        title: Text(l.upgradeToPro),
+                        onTap: () => UpgradePage.open(context)),
+              ),
+              ListTile(leading: const Icon(Icons.restore), title: Text(l.restorePurchase), onTap: _restore),
+            ]),
             _Group(l.dataGroup, [
               ListTile(
                   leading: const Icon(Icons.upload_outlined),
@@ -201,6 +226,13 @@ class _SettingsPageState extends State<SettingsPage> with WidgetsBindingObserver
                   subtitle: Text(l.exportHint),
                   onTap: _export),
               ListTile(leading: const Icon(Icons.download_outlined), title: Text(l.importData), onTap: _import),
+            ]),
+            _Group(l.aboutGroup, [
+              ListTile(
+                leading: const Icon(Icons.cloud_off_outlined),
+                title: Text(l.privacy),
+                subtitle: Text(l.privacyBody),
+              ),
             ]),
           ]),
         ),

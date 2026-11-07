@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Samsung IAP (US6, FR-030): jaringan pembelian ditangani aplikasi Galaxy Store, bukan app ini. -->
+    <uses-permission android:name="com.samsung.android.iap.permission.BILLING"/>
 
     <application
         android:label="@string/app_name"
@@ -95,6 +97,8 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
+        <!-- Cek Galaxy Store terpasang (IapBridge, API 30+ package visibility). -->
+        <package android:name="com.sec.android.app.samsungapps"/>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
