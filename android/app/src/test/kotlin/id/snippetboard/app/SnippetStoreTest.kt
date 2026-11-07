@@ -17,33 +17,7 @@ import java.io.File
 class SnippetStoreTest {
     @get:Rule val tmp = TemporaryFolder()
 
-    // DDL harus sama dengan yang dihasilkan drift dari lib/data/db.dart (lihat docs/contracts/db-schema.md).
-    private fun seed(): File {
-        val f = File(tmp.root, "snippets.db")
-        SQLiteDatabase.openOrCreateDatabase(f, null).use { db ->
-            db.execSQL(
-                """CREATE TABLE snippets (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,
-                   body TEXT NOT NULL, category INTEGER NOT NULL DEFAULT 0, pinned INTEGER NOT NULL DEFAULT 0 CHECK (pinned IN (0, 1)),
-                   created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL, last_copied_at INTEGER NULL,
-                   copy_count INTEGER NOT NULL DEFAULT 0)""",
-            )
-            db.execSQL("CREATE TABLE settings (key TEXT NOT NULL PRIMARY KEY, value TEXT NOT NULL)")
-            // id, category, pinned, created_at, last_copied_at
-            listOf(
-                arrayOf<Any?>(1, 0, 0, 100, null),
-                arrayOf<Any?>(2, 2, 0, 200, null),
-                arrayOf<Any?>(3, 0, 1, 50, null),
-                arrayOf<Any?>(4, 0, 0, 10, 999),
-            ).forEach { (id, cat, pin, created, copied) ->
-                db.execSQL(
-                    "INSERT INTO snippets(id,title,body,category,pinned,created_at,updated_at,last_copied_at) VALUES (?,?,?,?,?,?,?,?)",
-                    arrayOf(id, "t$id", "b$id", cat, pin, created, created, copied),
-                )
-            }
-            db.execSQL("INSERT INTO settings VALUES ('var_nama','Budi'),('onboarding_done','1')")
-        }
-        return f
-    }
+    private fun seed(): File = File(tmp.root, "snippets.db").also(::seedSnippetsDb)
 
     @Test fun listOrderPinnedThenCopiedThenCreated() =
         assertEquals(listOf(3L, 4L, 2L, 1L), SnippetStore(seed()).list().map { it.id })
@@ -82,6 +56,33 @@ class SnippetStoreTest {
         assertNull(store.get(1))
         assertTrue(store.settings().isEmpty())
         assertTrue(!f.exists())
+    }
+}
+
+// DDL harus sama dengan yang dihasilkan drift dari lib/data/db.dart (lihat docs/contracts/db-schema.md).
+// Dipakai juga oleh EdgeListServiceTest.
+internal fun seedSnippetsDb(f: File) {
+    SQLiteDatabase.openOrCreateDatabase(f, null).use { db ->
+        db.execSQL(
+            """CREATE TABLE snippets (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,
+               body TEXT NOT NULL, category INTEGER NOT NULL DEFAULT 0, pinned INTEGER NOT NULL DEFAULT 0 CHECK (pinned IN (0, 1)),
+               created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL, last_copied_at INTEGER NULL,
+               copy_count INTEGER NOT NULL DEFAULT 0)""",
+        )
+        db.execSQL("CREATE TABLE settings (key TEXT NOT NULL PRIMARY KEY, value TEXT NOT NULL)")
+        // id, category, pinned, created_at, last_copied_at
+        listOf(
+            arrayOf<Any?>(1, 0, 0, 100, null),
+            arrayOf<Any?>(2, 2, 0, 200, null),
+            arrayOf<Any?>(3, 0, 1, 50, null),
+            arrayOf<Any?>(4, 0, 0, 10, 999),
+        ).forEach { (id, cat, pin, created, copied) ->
+            db.execSQL(
+                "INSERT INTO snippets(id,title,body,category,pinned,created_at,updated_at,last_copied_at) VALUES (?,?,?,?,?,?,?,?)",
+                arrayOf(id, "t$id", "b$id", cat, pin, created, created, copied),
+            )
+        }
+        db.execSQL("INSERT INTO settings VALUES ('var_nama','Budi'),('onboarding_done','1')")
     }
 }
 

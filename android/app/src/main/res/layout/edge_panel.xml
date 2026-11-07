@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Edge Panel (ui-specs §5.2). RemoteViews: hanya LinearLayout/FrameLayout/TextView/ImageView/ImageButton/ListView. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_edge_panel"
+    android:orientation="vertical"
+    android:padding="@dimen/edge_padding">
+
+    <!-- Header: judul + Tambah -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_min"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/space_half"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@string/edge_title"
+            android:textAppearance="@style/TextAppearance.SnippetBoard.EdgeTitle"/>
+        <ImageButton
+            android:id="@+id/edge_add"
+            android:layout_width="@dimen/touch_min"
+            android:layout_height="@dimen/touch_min"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/add"
+            android:src="@drawable/ic_add"
+            android:tint="@color/primary"/>
+    </LinearLayout>
+
+    <!-- Search pill → PickerActivity(search) -->
+    <LinearLayout
+        android:id="@+id/edge_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/space_half"
+        android:background="@drawable/bg_pill"
+        android:contentDescription="@string/search"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/space_1_5"
+        android:paddingEnd="@dimen/space_1_5">
+        <ImageView
+            android:layout_width="@dimen/icon_sm"
+            android:layout_height="@dimen/icon_sm"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_search"
+            android:tint="@color/on_surface_variant"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_1"
+            android:text="@string/search"
+            android:textAppearance="@style/TextAppearance.SnippetBoard.EdgeBody"/>
+    </LinearLayout>
+
+    <!-- Cycle chip kategori (ui-specs §5.4) -->
+    <LinearLayout
+        android:id="@+id/edge_cycle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/space_1"
+        android:background="@drawable/bg_pill"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/space_1_5"
+        android:paddingEnd="@dimen/space_1_5">
+        <ImageView
+            android:id="@+id/edge_cycle_dot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/dot"/>
+        <TextView
+            android:id="@+id/edge_cycle_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/space_1"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.SnippetBoard.Label"/>
+        <ImageView
+            android:layout_width="@dimen/icon_sm"
+            android:layout_height="@dimen/icon_sm"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_swap_vert"
+            android:tint="@color/on_surface_variant"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/space_1">
+        <ListView
+            android:id="@+id/edge_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/space_1"
+            android:scrollbars="none"/>
+
+        <!-- State kosong (ui-specs §5.6) -->
+        <LinearLayout
+            android:id="@+id/edge_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/squircle_tile"
+                android:layout_height="@dimen/squircle_tile"
+                android:importantForAccessibility="no"
+                android:src="@drawable/bg_squircle"
+                android:tint="@color/chip_bg"/>
+            <TextView
+                android:id="@+id/edge_empty_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_1"
+                android:gravity="center"
+                android:text="@string/empty_state"
+                android:textAppearance="@style/TextAppearance.SnippetBoard.EdgeBody"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/edge_open"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/touch_min"
+        android:gravity="center"
+        android:text="@string/open_app"
+        android:textAppearance="@style/TextAppearance.SnippetBoard.Label"
+        android:textColor="@color/primary"/>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package id.snippetboard.app
 
 import id.snippetboard.app.core.CopyFlow
+import id.snippetboard.app.edge.SnippetEdgeProvider
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -22,7 +23,11 @@ class MainActivity : FlutterActivity() {
                             result.success(mapOf("status" to "needsInput", "missing" to s.missing))
                     }
                 }
-                "refreshSurfaces" -> result.success(null) // diisi di T032 (Edge Panel)
+                "refreshSurfaces" -> {
+                    SnippetEdgeProvider.update(this)
+                    result.success(null)
+                }
+                "edgePanelSupported" -> result.success(SnippetEdgeProvider.supported(this))
                 else -> result.notImplemented()
             }
         }

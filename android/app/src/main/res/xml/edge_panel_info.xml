@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Metadata Samsung Edge Panel (Look SDK, cocktail provider). cocktailWidth dalam px; 660 = batas mode edge_single_plus. -->
+<cocktail-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:category="1"
+    android:cocktailWidth="660"
+    android:description="@string/edge_desc"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/edge_label"
+    android:launchOnClick="id.snippetboard.app.MainActivity"
+    android:permitVisibilityChanged="true"
+    android:previewImage="@mipmap/ic_launcher"/>

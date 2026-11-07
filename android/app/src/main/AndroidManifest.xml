@@ -31,6 +31,33 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- Samsung Edge Panel (Look SDK, ui-specs §5). WRITE_USE_APP_FEATURE_SURVEY tidak diwajibkan Slook 1.4.0. -->
+        <meta-data
+            android:name="com.samsung.android.cocktail.mode"
+            android:value="edge_single_plus"/>
+        <receiver
+            android:name=".edge.SnippetEdgeProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="com.samsung.android.cocktail.provider"
+                android:resource="@xml/edge_panel_info"/>
+        </receiver>
+        <service
+            android:name=".edge.EdgeListService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <!-- Salin dari Edge/Tile/Overlay tanpa membuka Flutter (T030/T042). -->
+        <activity
+            android:name=".picker.PickerActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.SnippetBoard.Picker"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

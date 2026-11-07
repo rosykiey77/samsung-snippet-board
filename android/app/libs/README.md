@@ -13,4 +13,4 @@ Langkah:
 2. Salin `.jar` / `.aar` ke `android/app/libs/`.
 3. `flutter build apk` — tidak perlu mengubah Gradle.
 
-Build tanpa file ini tetap berhasil sampai task yang memakai Slook/IAP diimplementasikan.
+**Sejak US2 (Edge Panel) `slook_v1.4.0.jar` wajib ada** — tanpa itu `SnippetEdgeProvider` tidak terkompilasi. IAP AAR baru wajib sejak US6.

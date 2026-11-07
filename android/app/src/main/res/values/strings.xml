@@ -8,4 +8,22 @@
     <string name="category_work">Work</string>
     <string name="category_account">Account</string>
     <string name="category_chat">Chat</string>
+    <string name="category_all">All</string>
+    <string name="edge_label">Snippet Board</string>
+    <string name="edge_desc">Tap a snippet to copy it</string>
+    <string name="edge_title">Snippets</string>
+    <string name="add">Add</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search snippets…</string>
+    <string name="open_app">Open app</string>
+    <string name="pick_title">Choose snippet</string>
+    <string name="filter_empty">Nothing in %1$s</string>
+    <string name="cd_copy">%1$s. Tap to copy</string>
+    <string name="cd_copy_masked">%1$s. Tap to copy, number masked</string>
+    <string name="cd_filter">Filter: %1$s. Tap for next category</string>
+    <string name="var_title">Fill in variables</string>
+    <string name="var_nama">Name</string>
+    <string name="var_rekening">Account number</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_cancel">Cancel</string>
 </resources>

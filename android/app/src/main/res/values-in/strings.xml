@@ -5,4 +5,21 @@
     <string name="category_work">Kerja</string>
     <string name="category_account">Rekening</string>
     <string name="category_chat">Chat</string>
+    <string name="category_all">Semua</string>
+    <string name="edge_desc">Ketuk snippet untuk menyalin</string>
+    <string name="edge_title">Snippet</string>
+    <string name="add">Tambah</string>
+    <string name="search">Cari</string>
+    <string name="search_hint">Cari snippet…</string>
+    <string name="open_app">Buka app</string>
+    <string name="pick_title">Pilih snippet</string>
+    <string name="filter_empty">Tidak ada di %1$s</string>
+    <string name="cd_copy">%1$s. Ketuk untuk menyalin</string>
+    <string name="cd_copy_masked">%1$s. Ketuk untuk menyalin, nomor disamarkan</string>
+    <string name="cd_filter">Filter: %1$s. Ketuk untuk kategori berikutnya</string>
+    <string name="var_title">Lengkapi variabel</string>
+    <string name="var_nama">Nama</string>
+    <string name="var_rekening">Nomor rekening</string>
+    <string name="action_copy">Salin</string>
+    <string name="action_cancel">Batal</string>
 </resources>

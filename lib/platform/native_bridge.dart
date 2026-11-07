@@ -30,4 +30,7 @@ class NativeBridge {
   }
 
   Future<void> refreshSurfaces() => _channel.invokeMethod<void>('refreshSurfaces');
+
+  Future<bool> edgePanelSupported() async =>
+      await _channel.invokeMethod<bool>('edgePanelSupported') ?? false;
 }
