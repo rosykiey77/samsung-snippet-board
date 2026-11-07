@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chip & search pill -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/surface_pressed">
+    <item><shape><solid android:color="@color/chip_bg"/><corners android:radius="@dimen/radius_full"/></shape></item>
+</ripple>

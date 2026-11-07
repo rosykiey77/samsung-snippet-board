@@ -18,6 +18,8 @@ SELECT body, category FROM snippets WHERE id = :id;
 SELECT key, value FROM settings WHERE key IN ('var_nama','var_rekening','is_pro','overlay_enabled','overlay_x','overlay_y');
 ```
 
+> Catatan Kotlin: `rawQuery` mengikat argumen sebagai TEXT, jadi `:cat = -1` ditulis `CAST(? AS INTEGER) = -1`.
+
 ## Write
 
 ```sql

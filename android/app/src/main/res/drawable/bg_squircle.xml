@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Squircle 40dp untuk ikon kategori; warna diisi lewat tint (container kategori). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/squircle_tile" android:height="@dimen/squircle_tile"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M12,0 C20.5,0 24,3.5 24,12 C24,20.5 20.5,24 12,24 C3.5,24 0,20.5 0,12 C0,3.5 3.5,0 12,0 Z"/>
+</vector>

@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitle": "Snippet Board",
+  "@appTitle": { "description": "App name shown in the header and task switcher" },
+  "copied": "Copied",
+  "categoryPersonal": "Personal",
+  "categoryWork": "Work",
+  "categoryAccount": "Account",
+  "categoryChatTemplate": "Chat template",
+  "emptyState": "No snippets yet"
+}

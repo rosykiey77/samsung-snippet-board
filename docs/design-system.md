@@ -666,7 +666,8 @@ Permukaan native memakai **View + XML** (RemoteViews untuk Edge Panel tidak mend
   </style>
 
   <!-- Picker: Activity translucent + bottom sheet (T030/T043) -->
-  <style name="Theme.SnippetBoard.Picker" parent="Theme.DeviceDefault.DayNight.Dialog.NoActionBar">
+  <style name="Theme.SnippetBoard.Picker" parent="@android:style/Theme.DeviceDefault.DayNight">
+    <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:backgroundDimEnabled">true</item>

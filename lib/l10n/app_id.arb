@@ -1,0 +1,10 @@
+{
+  "@@locale": "id",
+  "appTitle": "Snippet Board",
+  "copied": "Disalin",
+  "categoryPersonal": "Personal",
+  "categoryWork": "Kerja",
+  "categoryAccount": "Rekening",
+  "categoryChatTemplate": "Template Chat",
+  "emptyState": "Belum ada snippet"
+}
