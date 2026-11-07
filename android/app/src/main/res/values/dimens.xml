@@ -36,4 +36,5 @@
   <dimen name="text_label_small">12sp</dimen>
   <dimen name="text_edge_title">14sp</dimen>
   <dimen name="text_edge_body">12sp</dimen>
+  <dimen name="bubble_size">56dp</dimen>
 </resources>

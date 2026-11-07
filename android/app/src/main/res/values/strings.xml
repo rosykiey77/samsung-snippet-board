@@ -26,4 +26,10 @@
     <string name="var_rekening">Account number</string>
     <string name="action_copy">Copy</string>
     <string name="action_cancel">Cancel</string>
+    <string name="tile_label">Quick Snippet</string>
+    <string name="overlay_channel">Snippet bubble</string>
+    <string name="overlay_notif_title">Floating button is on</string>
+    <string name="overlay_notif_text">Tap to choose a snippet</string>
+    <string name="overlay_stop">Turn off</string>
+    <string name="overlay_cd">Quick Snippet. Tap to open the snippet list</string>
 </resources>

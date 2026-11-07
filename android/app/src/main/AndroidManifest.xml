@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Tanpa INTERNET di main (FR-029/030). Izin lain ditambahkan per user story. -->
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- Overlay fallback (US5, FR-022/023) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:label="@string/app_name"
@@ -58,6 +63,26 @@
             android:taskAffinity=""
             android:theme="@style/Theme.SnippetBoard.Picker"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <!-- Quick Settings tile (FR-021). -->
+        <service
+            android:name=".tile.SnippetTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_snippet"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        <!-- Gelembung mengambang (FR-022). -->
+        <service
+            android:name=".overlay.SnippetOverlayService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Floating snippet picker"/>
+        </service>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

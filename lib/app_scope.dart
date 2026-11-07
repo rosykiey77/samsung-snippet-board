@@ -1,16 +1,18 @@
 import 'package:flutter/widgets.dart';
 
 import 'data/db.dart';
+import 'data/settings_repo.dart';
 import 'data/snippet_repo.dart';
 import 'platform/native_bridge.dart';
 
 /// Dependensi app untuk seluruh pohon widget (tanpa library DI/state-management, plan.md).
 class AppScope extends InheritedWidget {
-  const AppScope({super.key, required this.db, required this.repo, required this.bridge, required super.child});
+  const AppScope({super.key, required this.db, required this.repo, required this.bridge, required this.settings, required super.child});
 
   final AppDb db;
   final SnippetRepo repo;
   final NativeBridge bridge;
+  final SettingsRepo settings;
 
   static AppScope of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<AppScope>()!;
 

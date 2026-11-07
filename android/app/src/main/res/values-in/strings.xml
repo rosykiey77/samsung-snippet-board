@@ -22,4 +22,10 @@
     <string name="var_rekening">Nomor rekening</string>
     <string name="action_copy">Salin</string>
     <string name="action_cancel">Batal</string>
+    <string name="tile_label">Quick Snippet</string>
+    <string name="overlay_channel">Gelembung snippet</string>
+    <string name="overlay_notif_title">Tombol mengambang aktif</string>
+    <string name="overlay_notif_text">Ketuk untuk memilih snippet</string>
+    <string name="overlay_stop">Matikan</string>
+    <string name="overlay_cd">Quick Snippet. Ketuk untuk membuka daftar snippet</string>
 </resources>

@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'app_scope.dart';
 import 'data/db.dart';
+import 'data/settings_repo.dart';
 import 'data/snippet_repo.dart';
 import 'l10n/app_localizations.dart';
 import 'platform/native_bridge.dart';
@@ -14,7 +15,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   final db = AppDb();
   const bridge = NativeBridge();
-  runApp(AppScope(db: db, repo: SnippetRepo(db, bridge), bridge: bridge, child: const SnippetBoardApp()));
+  runApp(AppScope(
+      db: db,
+      repo: SnippetRepo(db, bridge),
+      bridge: bridge,
+      settings: SettingsRepo(db, bridge),
+      child: const SnippetBoardApp()));
 }
 
 class SnippetBoardApp extends StatefulWidget {

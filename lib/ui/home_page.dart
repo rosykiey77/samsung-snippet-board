@@ -5,6 +5,7 @@ import '../data/db.dart';
 import '../l10n/app_localizations.dart';
 import 'category_chips.dart';
 import 'editor_page.dart';
+import 'settings_page.dart';
 import 'snippet_card.dart';
 import 'theme.dart';
 
@@ -112,6 +113,14 @@ class _HomePageState extends State<HomePage> {
               pinned: true,
               toolbarHeight: OneUiSpace.s8,
               expandedHeight: viewing,
+              actions: [
+                IconButton(
+                  tooltip: l.settings,
+                  icon: const Icon(Icons.settings_outlined),
+                  onPressed: () => Navigator.push(
+                      context, MaterialPageRoute<void>(builder: (_) => const SettingsPage())),
+                ),
+              ],
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsetsDirectional.only(start: OneUiSpace.s2, bottom: OneUiSpace.s2),
                 expandedTitleScale: 34 / 20, // headerLarge → titleBar

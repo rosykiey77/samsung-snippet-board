@@ -30,7 +30,7 @@ class SnippetRepo {
       db.watchSnippets(category: category, query: query);
 
   Future<int> create({required String title, required String body, int category = Category.personal}) async {
-    final t = _validate(title, body, category);
+    final t = validate(title, body, category);
     if (await db.getSetting('is_pro') != '1' && await db.countSnippets() >= freeLimit) {
       throw const FreeLimitReached();
     }
@@ -43,7 +43,7 @@ class SnippetRepo {
 
   /// Edit selalu diizinkan berapa pun jumlah snippet (refund tidak mengunci data, FR-038).
   Future<void> update(int id, {required String title, required String body, required int category}) async {
-    final t = _validate(title, body, category);
+    final t = validate(title, body, category);
     await (db.update(db.snippets)..where((s) => s.id.equals(id))).write(
         SnippetsCompanion(title: Value(t), body: Value(body), category: Value(category), updatedAt: Value(_now)));
     await bridge.refreshSurfaces();
@@ -78,7 +78,7 @@ class SnippetRepo {
   }
 
   /// Mengembalikan judul final. Judul kosong → 30 karakter pertama isi.
-  static String _validate(String title, String body, int category) {
+  static String validate(String title, String body, int category) {
     if (body.trim().isEmpty || body.length > maxBody) throw const SnippetInvalid('body');
     if (!Category.values.contains(category)) throw ArgumentError.value(category, 'category');
     var t = title.trim();

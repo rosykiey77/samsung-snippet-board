@@ -2,6 +2,8 @@ package id.snippetboard.app.picker
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -24,6 +26,7 @@ import id.snippetboard.app.edge.EdgeModel
 /**
  * Activity translucent untuk menyalin tanpa membuka Flutter (ui-specs §5.5, §6.2, §7).
  * - [ACTION_COPY] + [EXTRA_ID]: salin langsung; variabel kosong → dialog isian native.
+ * - [ACTION_PICK]: daftar ringkas untuk Tile/Overlay (tanpa keyboard otomatis).
  * - [ACTION_SEARCH]: cari snippet (keyboard langsung terbuka) → ketuk → alur copy yang sama.
  */
 class PickerActivity : Activity() {
@@ -32,7 +35,8 @@ class PickerActivity : Activity() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) return finish() // jangan salin ulang setelah rotasi/recreate
         when (intent.action) {
-            ACTION_SEARCH -> showSearch()
+            ACTION_SEARCH -> showSearch(autofocus = true)
+            ACTION_PICK -> showSearch(autofocus = false)
             else -> intent.getLongExtra(EXTRA_ID, -1).let { if (it < 0) finish() else copy(it, emptyMap()) }
         }
     }
@@ -91,7 +95,7 @@ class PickerActivity : Activity() {
         fields.first().requestFocus()
     }
 
-    private fun showSearch() {
+    private fun showSearch(autofocus: Boolean) {
         val all = SnippetStore(this).list(limit = 500)
         val pad = resources.getDimensionPixelSize(R.dimen.space_3)
         val search = EditText(this).apply {
@@ -145,9 +149,13 @@ class PickerActivity : Activity() {
             dialog.dismiss()
             copy(s.id, emptyMap())
         }
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+        // ui-specs §7: keyboard otomatis HANYA di mode search (Edge); tile/overlay mulai dari daftar.
+        dialog.window?.setSoftInputMode(
+            if (autofocus) WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+            else WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN,
+        )
         dialog.show()
-        search.requestFocus()
+        if (autofocus) search.requestFocus()
     }
 
     private fun EditText.onChange(f: (String) -> Unit) = addTextChangedListener(object : TextWatcher {
@@ -159,6 +167,12 @@ class PickerActivity : Activity() {
     companion object {
         const val ACTION_COPY = "id.snippetboard.app.picker.COPY"
         const val ACTION_SEARCH = "id.snippetboard.app.picker.SEARCH"
+        const val ACTION_PICK = "id.snippetboard.app.picker.PICK"
         const val EXTRA_ID = "snippet_id"
+
+        /** Picker ringkas untuk Tile & Overlay (dipanggil dari Service → butuh NEW_TASK). */
+        fun pickIntent(ctx: Context): Intent = Intent(ctx, PickerActivity::class.java)
+            .setAction(ACTION_PICK)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
 }

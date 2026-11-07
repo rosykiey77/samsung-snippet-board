@@ -56,5 +56,37 @@
   "varNama": "Name",
   "varRekening": "Account number",
   "cancel": "Cancel",
-  "copy": "Copy"
+  "copy": "Copy",
+  "settings": "Settings",
+  "variablesGroup": "Variables",
+  "defaultNama": "Default name",
+  "defaultRekening": "Default account number",
+  "notSet": "Not set — asked when copying",
+  "quickAccessGroup": "Quick access",
+  "edgePanel": "Edge Panel",
+  "edgePanelHint": "Show the snippet panel in the Edge Panel list",
+  "quickTile": "Quick Settings tile",
+  "quickTileHint": "Open snippets from the notification panel",
+  "addTile": "Add tile to Quick Settings",
+  "tileManual": "Swipe down the notification panel, tap Edit, then drag \"Quick Snippet\" in.",
+  "overlay": "Floating button",
+  "overlayHint": "A draggable bubble over other apps",
+  "overlayPermissionTitle": "Allow display over other apps",
+  "overlayPermissionBody": "The floating button needs permission to appear over other apps. It only opens your snippet list; nothing is read from the screen.",
+  "openSettings": "Open settings",
+  "dataGroup": "Data",
+  "exportData": "Export data",
+  "exportHint": "Saved as JSON. Account numbers are not masked in the file.",
+  "importData": "Import data",
+  "exportDone": "Data exported",
+  "importDone": "{count} snippets imported",
+  "importInvalid": "This file is not a Snippet Board backup",
+  "fileError": "Could not read or write the file",
+  "@importDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

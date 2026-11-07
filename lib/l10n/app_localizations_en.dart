@@ -151,4 +151,84 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copy => 'Copy';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get variablesGroup => 'Variables';
+
+  @override
+  String get defaultNama => 'Default name';
+
+  @override
+  String get defaultRekening => 'Default account number';
+
+  @override
+  String get notSet => 'Not set — asked when copying';
+
+  @override
+  String get quickAccessGroup => 'Quick access';
+
+  @override
+  String get edgePanel => 'Edge Panel';
+
+  @override
+  String get edgePanelHint => 'Show the snippet panel in the Edge Panel list';
+
+  @override
+  String get quickTile => 'Quick Settings tile';
+
+  @override
+  String get quickTileHint => 'Open snippets from the notification panel';
+
+  @override
+  String get addTile => 'Add tile to Quick Settings';
+
+  @override
+  String get tileManual =>
+      'Swipe down the notification panel, tap Edit, then drag \"Quick Snippet\" in.';
+
+  @override
+  String get overlay => 'Floating button';
+
+  @override
+  String get overlayHint => 'A draggable bubble over other apps';
+
+  @override
+  String get overlayPermissionTitle => 'Allow display over other apps';
+
+  @override
+  String get overlayPermissionBody =>
+      'The floating button needs permission to appear over other apps. It only opens your snippet list; nothing is read from the screen.';
+
+  @override
+  String get openSettings => 'Open settings';
+
+  @override
+  String get dataGroup => 'Data';
+
+  @override
+  String get exportData => 'Export data';
+
+  @override
+  String get exportHint =>
+      'Saved as JSON. Account numbers are not masked in the file.';
+
+  @override
+  String get importData => 'Import data';
+
+  @override
+  String get exportDone => 'Data exported';
+
+  @override
+  String importDone(int count) {
+    return '$count snippets imported';
+  }
+
+  @override
+  String get importInvalid => 'This file is not a Snippet Board backup';
+
+  @override
+  String get fileError => 'Could not read or write the file';
 }

@@ -4,13 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:snippetboard/app_scope.dart';
 import 'package:snippetboard/data/db.dart';
+import 'package:snippetboard/data/settings_repo.dart';
 import 'package:snippetboard/data/snippet_repo.dart';
 import 'package:snippetboard/l10n/app_localizations.dart';
 import 'package:snippetboard/platform/native_bridge.dart';
 import 'package:snippetboard/ui/home_page.dart';
 import 'package:snippetboard/ui/theme.dart';
 
-class _FakeBridge implements NativeBridge {
+class _FakeBridge extends Fake implements NativeBridge {
   final calls = <(int, Map<String, String>)>[];
   List<String> missing = const [];
   bool fail = false;
@@ -43,6 +44,7 @@ void main() {
       db: db,
       repo: repo,
       bridge: bridge,
+      settings: SettingsRepo(db, bridge),
       child: MaterialApp(
         locale: const Locale('id'),
         theme: buildOneUiTheme(Brightness.light),

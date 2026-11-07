@@ -151,4 +151,84 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get copy => 'Salin';
+
+  @override
+  String get settings => 'Pengaturan';
+
+  @override
+  String get variablesGroup => 'Variabel';
+
+  @override
+  String get defaultNama => 'Nama default';
+
+  @override
+  String get defaultRekening => 'Nomor rekening default';
+
+  @override
+  String get notSet => 'Belum diatur — ditanya saat menyalin';
+
+  @override
+  String get quickAccessGroup => 'Akses cepat';
+
+  @override
+  String get edgePanel => 'Edge Panel';
+
+  @override
+  String get edgePanelHint => 'Tampilkan panel snippet di daftar Edge Panel';
+
+  @override
+  String get quickTile => 'Tile Quick Settings';
+
+  @override
+  String get quickTileHint => 'Buka snippet dari panel notifikasi';
+
+  @override
+  String get addTile => 'Tambah tile ke Quick Settings';
+
+  @override
+  String get tileManual =>
+      'Usap panel notifikasi ke bawah, ketuk Edit, lalu seret \"Quick Snippet\" ke panel.';
+
+  @override
+  String get overlay => 'Tombol mengambang';
+
+  @override
+  String get overlayHint => 'Gelembung yang bisa diseret di atas aplikasi lain';
+
+  @override
+  String get overlayPermissionTitle => 'Izinkan tampil di atas aplikasi lain';
+
+  @override
+  String get overlayPermissionBody =>
+      'Tombol mengambang butuh izin untuk tampil di atas aplikasi lain. Tombol ini hanya membuka daftar snippet; tidak ada isi layar yang dibaca.';
+
+  @override
+  String get openSettings => 'Buka pengaturan';
+
+  @override
+  String get dataGroup => 'Data';
+
+  @override
+  String get exportData => 'Ekspor data';
+
+  @override
+  String get exportHint =>
+      'Disimpan sebagai JSON. Nomor rekening tidak dimasking di file.';
+
+  @override
+  String get importData => 'Impor data';
+
+  @override
+  String get exportDone => 'Data diekspor';
+
+  @override
+  String importDone(int count) {
+    return '$count snippet diimpor';
+  }
+
+  @override
+  String get importInvalid => 'File ini bukan backup Snippet Board';
+
+  @override
+  String get fileError => 'Gagal membaca atau menulis file';
 }

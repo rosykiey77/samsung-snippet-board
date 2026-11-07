@@ -379,6 +379,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copy'**
   String get copy;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @variablesGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Variables'**
+  String get variablesGroup;
+
+  /// No description provided for @defaultNama.
+  ///
+  /// In en, this message translates to:
+  /// **'Default name'**
+  String get defaultNama;
+
+  /// No description provided for @defaultRekening.
+  ///
+  /// In en, this message translates to:
+  /// **'Default account number'**
+  String get defaultRekening;
+
+  /// No description provided for @notSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set — asked when copying'**
+  String get notSet;
+
+  /// No description provided for @quickAccessGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick access'**
+  String get quickAccessGroup;
+
+  /// No description provided for @edgePanel.
+  ///
+  /// In en, this message translates to:
+  /// **'Edge Panel'**
+  String get edgePanel;
+
+  /// No description provided for @edgePanelHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show the snippet panel in the Edge Panel list'**
+  String get edgePanelHint;
+
+  /// No description provided for @quickTile.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Settings tile'**
+  String get quickTile;
+
+  /// No description provided for @quickTileHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open snippets from the notification panel'**
+  String get quickTileHint;
+
+  /// No description provided for @addTile.
+  ///
+  /// In en, this message translates to:
+  /// **'Add tile to Quick Settings'**
+  String get addTile;
+
+  /// No description provided for @tileManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe down the notification panel, tap Edit, then drag \"Quick Snippet\" in.'**
+  String get tileManual;
+
+  /// No description provided for @overlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Floating button'**
+  String get overlay;
+
+  /// No description provided for @overlayHint.
+  ///
+  /// In en, this message translates to:
+  /// **'A draggable bubble over other apps'**
+  String get overlayHint;
+
+  /// No description provided for @overlayPermissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow display over other apps'**
+  String get overlayPermissionTitle;
+
+  /// No description provided for @overlayPermissionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The floating button needs permission to appear over other apps. It only opens your snippet list; nothing is read from the screen.'**
+  String get overlayPermissionBody;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get openSettings;
+
+  /// No description provided for @dataGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get dataGroup;
+
+  /// No description provided for @exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export data'**
+  String get exportData;
+
+  /// No description provided for @exportHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved as JSON. Account numbers are not masked in the file.'**
+  String get exportHint;
+
+  /// No description provided for @importData.
+  ///
+  /// In en, this message translates to:
+  /// **'Import data'**
+  String get importData;
+
+  /// No description provided for @exportDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Data exported'**
+  String get exportDone;
+
+  /// No description provided for @importDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} snippets imported'**
+  String importDone(int count);
+
+  /// No description provided for @importInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'This file is not a Snippet Board backup'**
+  String get importInvalid;
+
+  /// No description provided for @fileError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read or write the file'**
+  String get fileError;
 }
 
 class _AppLocalizationsDelegate

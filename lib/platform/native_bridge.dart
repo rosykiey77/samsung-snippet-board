@@ -33,4 +33,27 @@ class NativeBridge {
 
   Future<bool> edgePanelSupported() async =>
       await _channel.invokeMethod<bool>('edgePanelSupported') ?? false;
+
+  /// `ok` atau `needsPermission` (izin tampil di atas app belum diberikan).
+  Future<String> setOverlayEnabled(bool enabled) async =>
+      (await _channel.invokeMapMethod<String, Object?>('setOverlayEnabled', {'enabled': enabled}))!['status']!
+          as String;
+
+  Future<void> openOverlayPermission() => _channel.invokeMethod<void>('openOverlayPermission');
+
+  /// false = API < 33, UI menampilkan instruksi manual.
+  Future<bool> requestAddTile() async => await _channel.invokeMethod<bool>('requestAddTile') ?? false;
+
+  /// `{edgeSupported, edge, tile, overlayPermission}`.
+  Future<Map<String, bool>> surfaceStatus() async =>
+      (await _channel.invokeMapMethod<String, bool>('surfaceStatus'))!;
+
+  Future<void> setSurfaceEnabled(String surface, bool enabled) =>
+      _channel.invokeMethod<void>('setSurfaceEnabled', {'surface': surface, 'enabled': enabled});
+
+  /// null = pengguna membatalkan pemilih file.
+  Future<bool?> saveDocument(String name, String content) =>
+      _channel.invokeMethod<bool>('saveDocument', {'name': name, 'content': content});
+
+  Future<String?> openDocument() => _channel.invokeMethod<String>('openDocument');
 }

@@ -5,7 +5,7 @@ import 'package:snippetboard/data/db.dart';
 import 'package:snippetboard/data/snippet_repo.dart';
 import 'package:snippetboard/platform/native_bridge.dart';
 
-class _FakeBridge implements NativeBridge {
+class _FakeBridge extends Fake implements NativeBridge {
   int refreshes = 0;
   @override
   Future<void> refreshSurfaces() async => refreshes++;

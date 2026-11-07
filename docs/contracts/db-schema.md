@@ -24,7 +24,7 @@ SELECT key, value FROM settings WHERE key IN ('var_nama','var_rekening','is_pro'
 
 ```sql
 UPDATE snippets SET last_copied_at = :now, copy_count = copy_count + 1 WHERE id = :id;
-INSERT OR REPLACE INTO settings(key, value) VALUES (:k, :v);  -- hanya is_pro, pro_verified_at, overlay_x, overlay_y
+INSERT OR REPLACE INTO settings(key, value) VALUES (:k, :v);  -- hanya is_pro, pro_verified_at, overlay_enabled (aksi "Matikan" overlay), overlay_x, overlay_y
 ```
 
 Kotlin tidak pernah INSERT/DELETE ke `snippets` dan tidak menjalankan DDL.

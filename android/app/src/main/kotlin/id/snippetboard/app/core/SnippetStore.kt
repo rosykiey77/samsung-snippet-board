@@ -73,6 +73,6 @@ class SnippetStore(private val dbFile: File) {
     companion object {
         const val DB_NAME = "snippets.db"
         const val CATEGORY_REKENING = 2
-        private val WRITABLE_KEYS = setOf("is_pro", "pro_verified_at", "overlay_x", "overlay_y")
+        private val WRITABLE_KEYS = setOf("is_pro", "pro_verified_at", "overlay_enabled", "overlay_x", "overlay_y")
     }
 }
