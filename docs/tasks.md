@@ -74,10 +74,10 @@ description: "Task list: One UI Quick Snippet & Clipboard (Edge Panel)"
 
 **Independent Test**: quickstart V1, V2.
 
-- [ ] T022 [P] [US1] Kartu snippet lib/ui/snippet_card.dart: judul + potongan isi `maxLines: 2`, ikon pin, `Semantics(label: title, hint: 'Ketuk untuk menyalin')`; `onTap` → `bridge.copySnippet`; `onLongPress` → bottom sheet Edit / Sematkan / Hapus (FR-013); konfirmasi "Disalin" sepenuhnya ditangani native `Copier` (Flutter tidak menampilkan SnackBar sendiri)
-- [ ] T023 [US1] Home lib/ui/home_page.dart: `CustomScrollView` dengan `SliverAppBar.large` (header One UI menyusut), `StreamBuilder` atas `watchSnippets()`, empty state "Belum ada snippet", FAB "Tambah" di bawah kanan; hapus → SnackBar "Urungkan" 5 detik memanggil `repo.restore` (FR-005)
-- [ ] T024 [US1] Editor lib/ui/editor_page.dart: field judul (maxLength 80), isi (maxLength 10000, multiline), simpan → `repo.create`/`repo.update`; tampilkan error validasi; tangkap `FreeLimitReached` → tampilkan dialog sementara "Batas 10 snippet tercapai" (diganti layar upgrade di US6)
-- [ ] T025 [US1] Tambahkan string US1 ke lib/l10n/app_en.arb & lib/l10n/app_id.arb (tambah, edit, hapus, urungkan, sematkan, validasi body kosong)
+- [X] T022 [P] [US1] Kartu snippet lib/ui/snippet_card.dart: judul + potongan isi `maxLines: 2`, ikon pin, `Semantics(label: title, hint: 'Ketuk untuk menyalin')`; `onTap` → `bridge.copySnippet`; `onLongPress` → bottom sheet Edit / Sematkan / Hapus (FR-013); konfirmasi "Disalin" sepenuhnya ditangani native `Copier` (Flutter tidak menampilkan SnackBar sendiri)
+- [X] T023 [US1] Home lib/ui/home_page.dart: `CustomScrollView` dengan `SliverAppBar.large` (header One UI menyusut), `StreamBuilder` atas `watchSnippets()`, empty state "Belum ada snippet", FAB "Tambah" di bawah kanan; hapus → SnackBar "Urungkan" 5 detik memanggil `repo.restore` (FR-005)
+- [X] T024 [US1] Editor lib/ui/editor_page.dart: field judul (maxLength 80), isi (maxLength 10000, multiline), simpan → `repo.create`/`repo.update`; tampilkan error validasi; tangkap `FreeLimitReached` → tampilkan dialog sementara "Batas 10 snippet tercapai" (diganti layar upgrade di US6)
+- [X] T025 [US1] Tambahkan string US1 ke lib/l10n/app_en.arb & lib/l10n/app_id.arb (tambah, edit, hapus, urungkan, sematkan, validasi body kosong)
 
 **Checkpoint**: MVP siap demo — V1, V2 lolos.
 
@@ -108,8 +108,8 @@ description: "Task list: One UI Quick Snippet & Clipboard (Edge Panel)"
 
 **Independent Test**: spec US3 skenario 1–4; quickstart V7.
 
-- [ ] T034 [P] [US3] Chip kategori + field pencarian di lib/ui/home_page.dart: `FilterChip` "Semua/Personal/Kerja/Rekening/Template Chat", search memanggil `watchSnippets(category, query)`; ikon kategori di lib/ui/snippet_card.dart
-- [ ] T035 [P] [US3] Selector kategori di lib/ui/editor_page.dart (`SegmentedButton`/dropdown, default Personal = 0)
+- [ ] T034 [P] [US3] Chip kategori + field pencarian di lib/ui/home_page.dart: `FilterChip` "Semua/Personal/Kerja/Rekening/Template Chat", search memanggil `watchSnippets(category, query)`; ikon kategori di lib/ui/snippet_card.dart — _chip selesai (lib/ui/category_chips.dart); field pencarian belum_
+- [X] T035 [P] [US3] Selector kategori di lib/ui/editor_page.dart (`SegmentedButton`/dropdown, default Personal = 0)
 - [ ] T036 [US3] Filter kategori di Edge Panel: baris chip/ikon di android/app/src/main/res/layout/edge_panel.xml, klik → broadcast ke `SnippetEdgeProvider` yang menyimpan kategori aktif (SharedPreferences native sederhana `edge_category`) lalu `notifyCocktailViewDataChanged`; `EdgeListService` membaca kategori itu
 - [ ] T037 [US3] Tambahkan label kategori & teks pencarian ke lib/l10n/app_en.arb, lib/l10n/app_id.arb, dan android/app/src/main/res/values{,-in}/strings.xml; verifikasi V7 (flag sensitif sudah diterapkan `Copier` dari T013)
 
@@ -122,8 +122,8 @@ description: "Task list: One UI Quick Snippet & Clipboard (Edge Panel)"
 **Independent Test**: quickstart V5, V6.
 
 - [ ] T038 [P] [US4] Bagian "Variabel" di lib/ui/settings_page.dart: field default `{nama}` & `{rekening}` disimpan ke settings `var_nama` / `var_rekening`, lalu `refreshSurfaces()`; tautkan dari menu Home
-- [ ] T039 [P] [US4] Dialog isian lib/ui/variable_dialog.dart: menerima `missing` list, satu TextField per variabel, kembalikan `Map<String,String>` atau `null` saat batal
-- [ ] T040 [US4] Hubungkan di lib/ui/snippet_card.dart: hasil `NeedsInput` → `variable_dialog` → panggil ulang `copySnippet(id, overrides)`; batal → tidak menyalin apa pun (FR-017)
+- [X] T039 [P] [US4] Dialog isian lib/ui/variable_dialog.dart: menerima `missing` list, satu TextField per variabel, kembalikan `Map<String,String>` atau `null` saat batal
+- [X] T040 [US4] Hubungkan di lib/ui/snippet_card.dart: hasil `NeedsInput` → `variable_dialog` → panggil ulang `copySnippet(id, overrides)`; batal → tidak menyalin apa pun (FR-017)
 - [ ] T041 [US4] Tombol sisip variabel di lib/ui/editor_page.dart: tiga `ActionChip` `{nama}` `{tanggal}` `{rekening}` yang menyisipkan token di posisi kursor `TextEditingController.selection`
 - [ ] T042 [US4] Dialog isian native di android/app/src/main/kotlin/id/snippetboard/app/picker/PickerActivity.kt: ganti perilaku sementara T030 — `NeedsInput` → `AlertDialog` (tema DeviceDefault.DayNight) dengan EditText per variabel; OK → `CopyFlow.run(id, overrides)`; Batal/dismiss → `finish()` tanpa menyalin
 

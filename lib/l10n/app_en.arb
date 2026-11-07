@@ -1,11 +1,60 @@
 {
   "@@locale": "en",
   "appTitle": "Snippet Board",
-  "@appTitle": { "description": "App name shown in the header and task switcher" },
+  "@appTitle": {
+    "description": "App name shown in the header and task switcher"
+  },
   "copied": "Copied",
   "categoryPersonal": "Personal",
   "categoryWork": "Work",
-  "categoryAccount": "Account",
-  "categoryChatTemplate": "Chat template",
-  "emptyState": "No snippets yet"
+  "categoryAccount": "Bank account",
+  "categoryChatTemplate": "Chat templates",
+  "emptyState": "No snippets yet",
+  "categoryAll": "All",
+  "add": "Add",
+  "edit": "Edit",
+  "delete": "Delete",
+  "pin": "Pin",
+  "unpin": "Unpin",
+  "deleted": "Snippet deleted",
+  "undo": "Undo",
+  "copyFailed": "Couldn't copy. Try again.",
+  "copiedAnnounce": "Copied: {title}",
+  "@copiedAnnounce": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "tapToCopy": "Double tap to copy",
+  "moreOptions": "More options",
+  "pinned": "pinned",
+  "showNumber": "Show number",
+  "hideNumber": "Hide number",
+  "emptyBody": "Save text you type often, then copy it with one tap.",
+  "createFirst": "Create first snippet",
+  "noResults": "No snippets in this category",
+  "clearFilter": "Clear filter",
+  "newSnippet": "New snippet",
+  "editSnippet": "Edit snippet",
+  "save": "Save",
+  "titleLabel": "Title",
+  "titleHint": "Auto from the first 30 characters",
+  "categoryLabel": "Category",
+  "bodyLabel": "Content",
+  "preview": "Preview",
+  "bodyEmpty": "Content can't be empty",
+  "titleTooLong": "Title is too long",
+  "freeLimitTitle": "Limit reached",
+  "freeLimitBody": "The free version holds up to 10 snippets.",
+  "ok": "OK",
+  "discardTitle": "Discard changes?",
+  "discard": "Discard",
+  "keepEditing": "Keep editing",
+  "fillVariables": "Fill in variables",
+  "varNama": "Name",
+  "varRekening": "Account number",
+  "cancel": "Cancel",
+  "copy": "Copy"
 }
